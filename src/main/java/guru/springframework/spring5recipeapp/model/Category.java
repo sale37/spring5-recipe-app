@@ -1,6 +1,7 @@
 package guru.springframework.spring5recipeapp.model;
 
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -16,6 +17,7 @@ public class Category {
     private String description;
     @ManyToMany(mappedBy = "categories")
     private Set<Recipe> recipes;
+    
 
 }
 
