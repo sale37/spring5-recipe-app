@@ -9,9 +9,7 @@ import org.junit.Test;
 
 import java.math.BigDecimal;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 public class IngredientCommandToIngredientTest {
 
@@ -47,7 +45,7 @@ public class IngredientCommandToIngredientTest {
         command.setDescription(DESCRIPTION);
         UnitOfMeasureCommand unitOfMeasureCommand = new UnitOfMeasureCommand();
         unitOfMeasureCommand.setId(UOM_ID);
-        command.setUnitOfMeasure(unitOfMeasureCommand);
+        command.setUom(unitOfMeasureCommand);
 
         //when
         Ingredient ingredient = converter.convert(command);
