@@ -3,6 +3,7 @@ package guru.springframework.spring5recipeapp.service;
 import guru.springframework.spring5recipeapp.commands.RecipeCommand;
 import guru.springframework.spring5recipeapp.converters.RecipeCommandToRecipe;
 import guru.springframework.spring5recipeapp.converters.RecipeToRecipeCommand;
+import guru.springframework.spring5recipeapp.exceptions.NotFoundException;
 import guru.springframework.spring5recipeapp.model.Recipe;
 import guru.springframework.spring5recipeapp.repositories.RecipeRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -31,9 +32,10 @@ public class RecipeSeviceImpl implements RecipeService {
     @Override
     public Set<Recipe> getRecipes() {
         log.debug("I'm in the service");
-        Set<Recipe> recepieSet = new HashSet<>();
-        recipeRepository.findAll().iterator().forEachRemaining(recepieSet::add);
-        return recepieSet;
+
+        Set<Recipe> recipeSet = new HashSet<>();
+        recipeRepository.findAll().iterator().forEachRemaining(recipeSet::add);
+        return recipeSet;
     }
 
     @Override
@@ -42,7 +44,7 @@ public class RecipeSeviceImpl implements RecipeService {
         Optional<Recipe> recipeOptional = recipeRepository.findById(id);
 
         if (!recipeOptional.isPresent()) {
-            throw new RuntimeException("Recipe Not Found!");
+            throw new NotFoundException("Recipe Not Found. For ID value: " + id.toString() );
         }
 
         return recipeOptional.get();
